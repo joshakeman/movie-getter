@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios'
 
 import GenreTab from './components/GenreTab'
+import Pagination from './components/Pagination'
 
 class App extends React.Component {
 
@@ -10,7 +11,8 @@ class App extends React.Component {
     super()
     this.state = {
       genreList: [{"name": "example 1"}, {"name": "example 2" }],
-      selectedMovies: []
+      selectedMovies: [],
+      totalResults: 0
     }
   }
 
@@ -34,6 +36,7 @@ class App extends React.Component {
     .then(res => {
       console.log(res.data)
       this.setState({
+        totalResults: res.data.total_results,
         selectedMovies: res.data.results
       })
     }).catch(err =>
@@ -41,14 +44,21 @@ class App extends React.Component {
       )
   }
 
-  flipPage = () => {
-    let pageNumber = 5
+  flipPage = (pageNumber) => {
     axios
     .get(`https://api.themoviedb.org/3/discover/movie?with_genres=18&api_key=694ed5c8eb4a1d99a4a920ee94ca1f5f&page=${pageNumber}`)
+    .then(res => {
+      console.log(res.data)
+      this.setState({
+        selectedMovies: res.data.results
+      })
+    }).catch(err =>
+      console.log(err)
+      )
   }
 
   render() {
-    const { genreList, selectedMovies } = this.state
+    const { genreList, selectedMovies, totalResults } = this.state
     return (
       <div className="App">
         <div className="genre-menu">
@@ -65,6 +75,7 @@ class App extends React.Component {
             </>
           )}
         </div>
+        <Pagination total={totalResults} flipPage={this.flipPage}/>
       </div>
     );
   }
