@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import GenreTab from './components/GenreTab'
 import Pagination from './components/Pagination'
+import MovieCard from './components/MovieCard'
 
 class App extends React.Component {
 
@@ -70,11 +71,7 @@ class App extends React.Component {
         </div>
         <div className="movie-list">
           {selectedMovies.map(movie => 
-          <>
-            <h3>{movie.title}</h3>
-            <p>{movie.overview}</p>
-            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
-            </>
+          <MovieCard title={movie.title} description={movie.overview} pic={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
           )}
         </div>
         <Pagination total={totalResults} flipPage={this.flipPage}/>
