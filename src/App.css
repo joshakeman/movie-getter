@@ -21,6 +21,12 @@
   color: #09d3ac;
 }
 
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .movie-card {
   display: flex;
   padding: 20px;
@@ -32,4 +38,9 @@
 
 .movie-card-content {
   padding: 10px;
+}
+
+.genre-menu {
+  display: flex;
+  flex-wrap: wrap;
 }
