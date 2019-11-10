@@ -12,7 +12,8 @@ class App extends React.Component {
     this.state = {
       genreList: [{"name": "example 1"}, {"name": "example 2" }],
       selectedMovies: [],
-      totalResults: 0
+      totalResults: 0,
+      currentGenreID: null
     }
   }
 
@@ -37,7 +38,8 @@ class App extends React.Component {
       console.log(res.data)
       this.setState({
         totalResults: res.data.total_results,
-        selectedMovies: res.data.results
+        selectedMovies: res.data.results,
+        currentGenreID: id
       })
     }).catch(err =>
       console.log(err)
@@ -46,7 +48,7 @@ class App extends React.Component {
 
   flipPage = (pageNumber) => {
     axios
-    .get(`https://api.themoviedb.org/3/discover/movie?with_genres=18&api_key=694ed5c8eb4a1d99a4a920ee94ca1f5f&page=${pageNumber}`)
+    .get(`https://api.themoviedb.org/3/discover/movie?with_genres=${this.state.currentGenreID}&api_key=694ed5c8eb4a1d99a4a920ee94ca1f5f&page=${pageNumber}`)
     .then(res => {
       console.log(res.data)
       this.setState({
