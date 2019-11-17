@@ -6,6 +6,8 @@ import GenreTab from './components/GenreTab'
 import Pagination from './components/Pagination'
 import MovieCard from './components/MovieCard'
 
+// Built based on this blog https://read.acloud.guru/serverless-golang-api-with-aws-lambda-34e442385a6a
+
 class App extends React.Component {
 
   constructor() {
